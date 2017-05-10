@@ -15,7 +15,7 @@
         <td><%= game.date_of_game %></td>
         <td><%= game.opponent(current_user).name %></td>
         <td><%= game.score_to_s  %></td>
-        <td><%=  game.result(current_user)%></td>
+        <td><%= game.result(current_user)%></td>
       </tr>
   	 <% end %>
   </tbody>

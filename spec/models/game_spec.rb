@@ -1,10 +1,18 @@
 require "rails_helper"
 
 RSpec.describe Game, :type => :model do
-  it "orders by last name" do
-    lindeman = Game.create!()
-    chelimsky = Game.create!()
+  it "checks that the score " do
+    game = build(:game)
+    game.winner = build(:user)
+    expect(game.save).to be_true
+    game = build(:game_bad_score)
+    game.winner = build(:user)
+    expect(game.save).to be_false
+  end
 
-    expect(Game.ordered_by_last_name).to eq([chelimsky, lindeman])
+  it "points" do
+    game = create(:game)
+    game.winner = build(:user)
+    expect(game.points).to be_a(Integer)
   end
 end

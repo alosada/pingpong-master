@@ -10,15 +10,13 @@
     </tr>
   </thead>
   <tbody>
-  	<tr>
-      <td>1</td>
-      <td>test</td>
-      <td>teste</td>
-      <td>testII Played</td>
-    </tr>
+  	<% User.order(:rank).each do |user| %>
+  	  <tr>
+        <td><%= user.rank %></td>
+        <td><%= user.name %></td>
+        <td><%=  user.score %></td>
+        <td><%=  user.games.count %></td>
+      </tr>
+  	 <% end %>
   </tbody>
 </table>
-
-<div class="alert alert-warning" role="alert">This is a sample page.</div>
-
-<%= image_tag('leaderboard.png') %>

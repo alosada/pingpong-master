@@ -9,7 +9,7 @@ end
 
 User.all.each do |u|
   u.name =
-    if u.email = 'alosada@gmail.com'
+    if u.email == 'alosada@gmail.com'
       'Alejandro'
     else
       ['Brian Jones', 'Jimi Hendrix', 'Janis Joplin', 'Jim Morrison', 'Kurt Cobain', 'Amy Winehouse'].sample

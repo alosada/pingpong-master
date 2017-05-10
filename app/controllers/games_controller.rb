@@ -1,32 +1,13 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: [:show, :edit, :update, :destroy]
-
-  # GET /games
-  def index
-    @games = Game.all
-  end
-
-  # GET /games/1
-  def show
-  end
-
-  # GET /games/new
-  def new
-    @game = Game.new
-  end
-
-  # GET /games/1/edit
-  def edit
-  end
-
   # POST /games
   def create
     @game = Game.new(game_params)
-
+    @game.users << current_user
+    @game.users << User.find(params['game']['opponent'])
     if @game.save
-      redirect_to @game, notice: 'Game was successfully created.'
+      redirect_to root_path
     else
-      render :new
+      redirect_to back
     end
   end
 
@@ -46,13 +27,19 @@ class GamesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_game
-      @game = Game.find(params[:id])
-    end
-
     # Only allow a trusted parameter "white list" through.
     def game_params
-      params[:game]
+      params[:game][:score] = {winner: params['game']['win'], looser: params['game']['loose']}.to_json
+      params[:game][:user_id] = 
+      if params[:game][:winner] == '1'
+        current_user.id
+      else
+        params[:game][:opponent]
+      end
+      params[:game][:date_of_game] = Date.new(params['game']['date_of_game(1i)'].to_i,
+                                              params['game']['date_of_game(2i)'].to_i,
+                                              params['game']['date_of_game(3i)'].to_i
+                                              )
+      params.require(:game).permit(:date_of_game, :user_id, :score)
     end
 end

@@ -1,5 +1,22 @@
 <h1 class='page-header'>Leaderboard</h1>
 
-<div class="alert alert-warning" role="alert">This is a sample page.</div>
-
-<%= image_tag('leaderboard.png') %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>Rank</td>
+      <td>Name</td>
+      <td>Score</td>
+      <td>Games Played</td>
+    </tr>
+  </thead>
+  <tbody>
+  	<% User.order(:rank).each do |user| %>
+  	  <tr>
+        <td><%= user.rank %></td>
+        <td><%= user.name %></td>
+        <td><%=  user.score %></td>
+        <td><%=  user.games.count %></td>
+      </tr>
+  	 <% end %>
+  </tbody>
+</table>

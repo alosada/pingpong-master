@@ -1,5 +1,22 @@
 <h1 class='page-header'>History</h1>
 
-<div class="alert alert-warning" role="alert">This is a sample page. Replace link in the header with your own.</div>
-
-<%= image_tag('history.png') %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>Date</td>
+      <td>Opponent</td>
+      <td>Score</td>
+      <td>Result</td>
+    </tr>
+  </thead>
+  <tbody>
+  	<% current_user.games.each do |game| %>
+  	  <tr>
+        <td><%= game.date_of_game %></td>
+        <td><%= game.opponent(current_user).name %></td>
+        <td><%= game.score_to_s  %></td>
+        <td><%= game.result(current_user)%></td>
+      </tr>
+  	 <% end %>
+  </tbody>
+</table>

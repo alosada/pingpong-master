@@ -23,4 +23,5 @@ RSpec.describe Game, :type => :model do
   end
 
   # need method to make sure looser score is not greater than winner score
+
 end

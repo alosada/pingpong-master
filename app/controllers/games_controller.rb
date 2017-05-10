@@ -11,23 +11,7 @@ class GamesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /games/1
-  def update
-    if @game.update(game_params)
-      redirect_to @game, notice: 'Game was successfully updated.'
-    else
-      render :edit
-    end
-  end
-
-  # DELETE /games/1
-  def destroy
-    @game.destroy
-    redirect_to games_url, notice: 'Game was successfully destroyed.'
-  end
-
   private
-    # Only allow a trusted parameter "white list" through.
     def game_params
       params[:game][:score] = {winner: params['game']['win'], looser: params['game']['loose']}.to_json
       params[:game][:user_id] = 

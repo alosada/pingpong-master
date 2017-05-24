@@ -1,9 +1,7 @@
 LINK TO APP https://ping-pong-challenge.herokuapp.com/
 
 ## Alejandro's Notes
-2. Introducing factory girl to test not a good idea with the limited timeframe.
 3. Updating the rank of the candidates and their score is better moved to a Background worker, no time to do so this time arround.
-6.  Overcomplicated things, go K.I.S.S. next time. 
 
 ## Getting Started
 

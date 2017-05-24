@@ -1,12 +1,7 @@
 LINK TO APP https://ping-pong-challenge.herokuapp.com/
 
 ## Alejandro's Notes
-1. Creating a joint table between games and users was a mistake, as difference between winner and looser had to be stablished anyway.
-2. Introducing factory girl to test not a good idea with the limited timeframe.
 3. Updating the rank of the candidates and their score is better moved to a Background worker, no time to do so this time arround.
-4. rather than storing json on a 'score' column, a 'score_json' column should have been created.
-5.  RE: pt 4, given time constrains even just simple columns for storage and forget the json
-6.  Overcomplicated things, go K.I.S.S. next time. 
 
 ## Getting Started
 

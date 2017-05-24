@@ -10,11 +10,16 @@ gem 'turbolinks',   '~> 2.5.3'
 
 gem 'devise',       '~> 3.5.2'
 gem 'devise-bootstrap-views', '~> 0.0.6'
+gem 'web-console', '~> 2.0', group: :development
 
 group :development, :test do
   gem 'byebug'
-  gem 'web-console', '~> 2.0'
   gem 'spring'
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl'
+  gem 'faker'
+end
+
+group :test do
+  # gem 'database_cleaner'
 end

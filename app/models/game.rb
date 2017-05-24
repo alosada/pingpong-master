@@ -17,8 +17,12 @@ class Game < ActiveRecord::Base
     JSON.parse(score_json)
   end
 
+  def won?(current_user)
+    winner == current_user
+  end
+
   def result(current_user)
-    return 'Won' if winner = current_user
+    return 'Won' if won?(current_user)
     'Lost'
   end
 

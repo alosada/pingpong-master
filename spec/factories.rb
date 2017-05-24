@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
     name ['Brian Jones', 'Jimi Hendrix', 'Janis Joplin', 'Jim Morrison', 'Kurt Cobain', 'Amy Winehouse'].sample
-    email "#{['Brian Jones', 'Jimi Hendrix', 'Janis Joplin', 'Jim Morrison', 'Kurt Cobain', 'Amy Winehouse'].sample}#{Time.now.to_s}@fake.com".gsub(' ', '')
+    email "#{['Brian Jones', 'Jimi Hendrix', 'Janis Joplin', 'Jim Morrison', 'Kurt Cobain', 'Amy Winehouse'].sample}@#{Time.now.to_s}.com".gsub(' ', '').downcase
     password 'pass123456789'
   end
 
@@ -11,6 +11,7 @@ FactoryGirl.define do
 
     after(:create) do |user, evaluator|
       create_list(:user, 2, game: game)
+      self.winner = self.users.first
     end
     
     factory :game_bad_score do

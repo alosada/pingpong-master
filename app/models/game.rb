@@ -14,7 +14,7 @@ class Game < ActiveRecord::Base
   end
 
   def score
-    JSON.parse(score)
+    JSON.parse(score_json)
   end
 
   def result(current_user)
@@ -34,7 +34,7 @@ class Game < ActiveRecord::Base
   private
 
   def score_diference
-    sscore['winner'].to_i - sscore['looser'].to_i
+    score['winner'].to_i - score['looser'].to_i
   end
     
   def set_score

@@ -2,26 +2,16 @@ require "rails_helper"
 
 RSpec.describe Game, :type => :model do
   it "checks that the score " do
-    # game = build(:game)
-    game = Game.create!(date_of_game: Date.today, score: {winner: 21, looser: 15}.to_json, winner: create(:user))
-    user = build(:user)
-    game.winner = user
-    game.users << user
-    game.users << build(:user)
-    expect(game.save).to be_true
-    # game = build(:game_bad_score)
-    game = Game.create!(date_of_game: Date.today, score: {winner: 21, looser: 20}.to_json, winner: create(:user))
-    game.winner = build(:user)
-    expect(game.save).to be_false
+    game = build(:game)
+    game.stub(:set_score) { true }
+    expect(game.save).to be true
+    game = build(:game, score_json: {winner: 21, looser: 20}.to_json)
+    game.stub(:set_score) { true }
+    expect(game.save).to be false
   end
 
-  it "points" do
-    # game = create(:game)
-    game = Game.create!(date_of_game: Date.today, score: {winner: 21, looser: 15}.to_json, winner: create(:user))
-    game.winner = build(:user)
-    expect(game.points).to be_a(Integer)
+  it "score_to_s" do
+    game = build(:game)
+    expect(game.score_to_s).to match(/\d+ to \d+/)
   end
-
-  # need method to make sure looser score is not greater than winner score
-
 end

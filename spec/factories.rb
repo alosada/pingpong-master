@@ -7,18 +7,14 @@ FactoryGirl.define do
 
   factory :game do
     date_of_game  Time.now
-    score  { {winner: 21, looser: 18}.to_json }
-
-    transient do
-      user_count 2
-    end
+    score_json  { {winner: 21, looser: 18}.to_json }
 
     after(:create) do |user, evaluator|
-      create_list(:user, evaluator.user_count, game: game)
+      create_list(:user, 2, game: game)
     end
     
     factory :game_bad_score do
-      score { {winner: 21, looser: 20}.to_json }
+      score_json { {winner: 21, looser: 20}.to_json }
     end
   end
   

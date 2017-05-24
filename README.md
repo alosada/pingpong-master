@@ -1,4 +1,5 @@
-LINK TO APP https://ping-pong-challenge.herokuapp.com/
+# LINK TO APP https://ping-pong-challenge.herokuapp.com/
+# Original submission to this challenge still available in original_submission branch
 
 ## Alejandro's Notes
 3. Updating the rank of the candidates and their score is better moved to a Background worker, no time to do so this time arround.

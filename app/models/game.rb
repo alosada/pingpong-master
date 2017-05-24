@@ -31,10 +31,6 @@ class Game < ActiveRecord::Base
     User.find(looser_id.first)
   end
 
-  def opponent(current_user)
-    users.where.not(id: current_user.id).first
-  end
-
   private
 
   def score_diference

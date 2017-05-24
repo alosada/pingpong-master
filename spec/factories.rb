@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
-    name ['Brian Jones', 'Jimi Hendrix', 'Janis Joplin', 'Jim Morrison', 'Kurt Cobain', 'Amy Winehouse'].sample
-    email "#{['Brian Jones', 'Jimi Hendrix', 'Janis Joplin', 'Jim Morrison', 'Kurt Cobain', 'Amy Winehouse'].sample}@#{Time.now.to_s}.com".gsub(' ', '').downcase
+    name { Faker::Name.name }
+    email { Faker::Internet.email }
     password 'pass123456789'
   end
 

@@ -52,11 +52,8 @@ class Game < ActiveRecord::Base
     errors.add(:score, "Margin is lesser than 2 points") unless score_diference >= 2
   end
 
-  def update_rank #candidate for BG worker
-    User.order(score: :desc).each_with_index do |user, index|
-      user.rank = index + 1
-      user.save
-    end
+  def update_rank
+    RankUpdater.perform_async
   end
 end
 

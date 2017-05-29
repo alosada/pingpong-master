@@ -1,6 +1,7 @@
 ## LINK TO APP https://ping-pong-challenge.herokuapp.com/
 ## Original submission to this challenge still available in original_submission branch
 
+
 ## Getting Started
 
 1. Run `bundle`

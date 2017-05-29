@@ -11,6 +11,7 @@ gem 'turbolinks',   '~> 2.5.3'
 gem 'devise',       '~> 3.5.2'
 gem 'devise-bootstrap-views', '~> 0.0.6'
 gem 'web-console', '~> 2.0', group: :development
+gem 'sidekiq'
 
 group :development, :test do
   gem 'byebug'

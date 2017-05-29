@@ -2,6 +2,7 @@ FactoryGirl.define do
   factory :user do
     name { Faker::Name.name }
     email { Faker::Internet.email }
+    score { 100*rand(1..9) }
     password 'pass123456789'
   end
 

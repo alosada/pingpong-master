@@ -4,9 +4,11 @@ RSpec.describe Game, :type => :model do
   it 'checks that the score diference is bigger than 2' do
     game = build(:game)
     game.stub(:set_score) { true }
+    game.stub(:update_rank) { User.all }
     expect(game.save).to be true
     game = build(:game_bad_score)
     game.stub(:set_score) { true }
+    game.stub(:update_rank) { User.all }
     expect(game.save).to be false
   end
 
@@ -48,6 +50,7 @@ RSpec.describe Game, :type => :model do
   it '#looser' do
     game = build(:game)
     game.stub(:set_score) { true }
+    game.stub(:update_rank) { User.all }
     2.times { game.users << create(:user) }
     game.winner = game.users.last
     game.save

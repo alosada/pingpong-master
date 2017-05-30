@@ -9,10 +9,16 @@ FactoryGirl.define do
   factory :game do
     date_of_game  Time.now
     score_json  { {winner: 21, looser: 18}.to_json }
+  
+    before(:create) do |game|
+      game.winner = create(:user)
+      game.users << game.winner
+      game.users << create(:user)
+      game.stub(:update_rank) { User.all }
+    end
 
-    after(:create) do |user, evaluator|
-      create_list(:user, 2, game: game)
-      self.winner = self.users.first
+    after(:build) do |game|
+      game.stub(:update_rank) { User.all }
     end
     
     factory :game_bad_score do

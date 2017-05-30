@@ -18,9 +18,8 @@ group :development, :test do
   gem 'spring'
   gem 'rspec-rails', '~> 3.5'
   gem 'factory_girl'
-  gem 'faker'
 end
 
 group :test do
-  # gem 'database_cleaner'
+  gem 'faker'
 end

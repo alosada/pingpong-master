@@ -5,9 +5,7 @@ RSpec.describe User, :type => :model do
     create(:user, score: 0)
     5.times do
       user = create(:user)
-      game = build(:game)
-      game.stub(:set_score) { true }
-      game.stub(:update_rank) { User.all }
+      game = create(:game)
       user.games << game
     end
     

@@ -12,7 +12,8 @@ RSpec.describe User, :type => :model do
     end
     
     users = User.update_ranks
-    expect(users.first.rank).to eq(1.to_s)
+    expect(users.first.rank).to eq('1')
+    expect(users[1].rank).to eq('2')
     expect(users.last.rank).to eq('N/A')
     expect(users.last.score).to eq(0)
   end

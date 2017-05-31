@@ -2,8 +2,8 @@ class Game < ActiveRecord::Base
   has_many :game_users
   has_many :users, through: :game_users
   belongs_to :winner, class_name: 'User', foreign_key: 'user_id'
-  before_save :set_score, :update_rank
-  validate :score_diference_greater_than_two
+  after_create :set_score, :update_rank
+  validate :score_diference_greater_than_two, :correct_number_of_players
 
   def opponent(current_user)
     users.where.not(id: current_user.id).first
@@ -27,29 +27,36 @@ class Game < ActiveRecord::Base
   end
 
   def looser
-    looser_id = GameUser.where(game_id: id).pluck(:user_id) - [user_id]
-    User.find(looser_id.first)
+    users.where.not(id: user_id).first
+  end
+
+  def correct_number_of_players?
+    users.length == 2
   end
 
   private
+
+  def multiplier
+    m = looser.rank.to_i - winner.rank.to_i
+    return 1 if m <=0
+    m
+  end
 
   def score_diference
     score['winner'].to_i - score['looser'].to_i
   end
     
   def set_score
-    multiplier = looser.rank.to_i - winner.rank.to_i
-    winner.score +=
-      if multiplier > 0
-        100*multiplier
-      else
-        100
-      end
+    winner.score += 100*multiplier
     winner.save
   end
 
   def score_diference_greater_than_two
-    errors.add(:score, "Margin is lesser than 2 points") unless score_diference >= 2
+    errors.add(:score, 'Margin is lesser than 2 points.') unless score_diference >= 2
+  end
+
+  def correct_number_of_players
+    errors.add(:players, "A game need 2 players. player count : #{users.count}") unless correct_number_of_players?
   end
 
   def update_rank

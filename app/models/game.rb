@@ -2,8 +2,7 @@ class Game < ActiveRecord::Base
   has_many :game_users
   has_many :users, through: :game_users
   belongs_to :winner, class_name: 'User', foreign_key: 'user_id'
-  after_save, :update_rank
-  after_save :set_score, only: [:create]
+  after_create :set_score, :update_rank
   validate :score_diference_greater_than_two, :correct_number_of_players
 
   def opponent(current_user)

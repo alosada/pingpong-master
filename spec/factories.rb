@@ -21,9 +21,6 @@ FactoryGirl.define do
       game.stub(:update_rank) { User.all }
     end
     
-    factory :game_bad_score do
-      score_json { {winner: 21, looser: 20}.to_json }
-    end
   end
   
 end

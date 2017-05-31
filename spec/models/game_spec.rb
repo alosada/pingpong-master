@@ -8,8 +8,10 @@ RSpec.describe Game, :type => :model do
 
   it 'checks that the score diference is bigger than 2' do
     game = build(:game)
+    game.stub(:set_score) { true }
+    game.stub(:correct_number_of_players?) { true }
     expect(game.save).to be true
-    game = build(:game_bad_score)
+    game.score_json = {winner: 21, looser: 20}.to_json
     expect(game.save).to be false
   end
 
@@ -25,7 +27,7 @@ RSpec.describe Game, :type => :model do
   end
 
   it '#score' do
-    game = build(:game)
+    game = create(:game)
     expect(game.score).to be_a Hash
     expect(game.score['winner']).to be_a Integer
     expect(game.score['looser']).to be_a Integer
@@ -51,5 +53,16 @@ RSpec.describe Game, :type => :model do
     expect(game.looser).not_to eq(game.winner)
   end
 
-  # it 'sets the score'
+  it 'sets the score' do
+    game = build(:game)
+    game.users << create(:user)
+    game.users << create(:user, score: 0)
+    game.winner = game.users.last
+    expect(game.winner.score).to eq(0)
+    game.save 
+    expect(game.winner.score).to eq(100)
+    game.save 
+    expect(game.winner.score).to eq(100)
+  end
+
 end

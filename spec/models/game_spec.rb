@@ -2,6 +2,10 @@ require "rails_helper"
 
 RSpec.describe Game, :type => :model do
 
+  before :each do
+    @game = create(:game)
+  end
+
   it 'has a valid factory' do
     create(:game).should be_valid
   end
@@ -16,21 +20,18 @@ RSpec.describe Game, :type => :model do
   end
 
   it '#score_to_s' do
-    game = create(:game)
-    expect(game.score_to_s).to match(/\d+ to \d+/)
+    expect(@game.score_to_s).to match(/\d+ to \d+/)
   end
 
   it '#opponent' do
-    game = create(:game)
-    expect(game.opponent(game.winner)).to be_a User
-    expect(game.opponent(game.winner)).not_to eq(game.winner)
+    expect(@game.opponent(@game.winner)).to be_a User
+    expect(@game.opponent(@game.winner)).not_to eq(@game.winner)
   end
 
   it '#score' do
-    game = create(:game)
-    expect(game.score).to be_a Hash
-    expect(game.score['winner']).to be_a Integer
-    expect(game.score['looser']).to be_a Integer
+    expect(@game.score).to be_a Hash
+    expect(@game.score['winner']).to be_a Integer
+    expect(@game.score['looser']).to be_a Integer
   end
 
   it '#won?' do
@@ -42,15 +43,13 @@ RSpec.describe Game, :type => :model do
   end
 
   it '#result' do
-    game = create(:game)
-    expect(game.result(game.winner)).to match('Won')
-    expect(game.result(game.looser)).to match('Lost')
+    expect(@game.result(@game.winner)).to match('Won')
+    expect(@game.result(@game.looser)).to match('Lost')
   end
 
   it '#looser' do
-    game = create(:game)
-    expect(game.looser).to be_a User
-    expect(game.looser).not_to eq(game.winner)
+    expect(@game.looser).to be_a User
+    expect(@game.looser).not_to eq(@game.winner)
   end
 
   it 'sets the score' do

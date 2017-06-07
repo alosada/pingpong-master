@@ -1,5 +1,3 @@
-## LINK TO APP https://ping-pong-challenge.herokuapp.com/
-
 ## Getting Started
 
 1. Run `bundle`

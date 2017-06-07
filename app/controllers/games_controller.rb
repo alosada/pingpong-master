@@ -1,4 +1,9 @@
 class GamesController < ApplicationController
+  
+  def index
+    @games = current_user.games
+  end
+
   # POST /games
   def create
     @game = Game.new(game_params)

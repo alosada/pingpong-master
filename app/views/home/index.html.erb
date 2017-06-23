@@ -1,4 +1,5 @@
 <h1 class='page-header'>Leaderboard</h1>
+<p>Updates every 10 seconds!</p>
 
 <table class="table table-striped">
   <thead>
@@ -9,14 +10,23 @@
       <td>Games Played</td>
     </tr>
   </thead>
-  <tbody>
-  	<% User.order(:rank).each do |user| %>
-  	  <tr>
+  <tbody id='index-table-body'>
+    <% User.order(:rank).each do |user| %>
+      <tr>
         <td><%= user.rank %></td>
         <td><%= user.name %></td>
         <td><%=  user.score %></td>
         <td><%=  user.games.count %></td>
       </tr>
-  	 <% end %>
+    <% end %>
   </tbody>
 </table>
+<script type="text/javascript">
+    window.addEventListener('load', function(){
+        var params = {'listId':'index-table-body'};
+        params['url'] = '/users';
+        params['clearTable'] =  true;
+        params['refreshRate'] = 10000;
+        new TableUpdater(params);
+    })
+</script>

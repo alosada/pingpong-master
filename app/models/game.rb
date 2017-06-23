@@ -37,8 +37,8 @@ class Game < ActiveRecord::Base
   private
 
   def multiplier
-    m = looser.rank.to_i - winner.rank.to_i
-    return 1 if m <=0
+    m = winner.rank.to_i - looser.rank.to_i 
+    return 1 if m <= 0
     m
   end
 

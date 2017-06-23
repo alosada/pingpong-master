@@ -1,9 +1,6 @@
 class HomeController < ApplicationController
   def index
-  end
-
-  def history
-    @games = current_user.games
+    @users = User.order(:rank)
   end
 
   def log

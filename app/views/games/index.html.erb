@@ -1,0 +1,31 @@
+<h1 class='page-header'>History</h1>
+
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <td>Date</td>
+      <td>Opponent</td>
+      <td>Score</td>
+      <td>Result</td>
+    </tr>
+  </thead>
+  <tbody id='index-table-body'>
+  	<% @games.each do |game| %>
+  	  <tr>
+        <td><%= game.date_of_game.strftime("%d/%m/%Y") %></td>
+        <td><%= game.opponent(current_user).name %></td>
+        <td><%= game.score_to_s  %></td>
+        <td><%= game.result(current_user)%></td>
+      </tr>
+  	 <% end %>
+  </tbody>
+</table>
+<script type="text/javascript">
+    window.addEventListener('load', function(){
+        var params = {'listId':'index-table-body'};
+        params['url'] = '/games';
+        params['clearTable'] =  false;
+        params['refreshRate'] = 5000;
+        new TableUpdater(params);
+    })
+</script>

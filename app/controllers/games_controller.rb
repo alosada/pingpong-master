@@ -1,4 +1,19 @@
 class GamesController < ApplicationController
+  
+  def index
+    if request.xhr?
+      time = Time.at(session['games_updated_at'])
+      session['games_updated_at'] = Time.now.to_i
+      games = current_user.games.where('updated_at > ?', time).order(updated_at: :desc).map do |game|
+        [game.date_of_game.strftime("%d/%m/%Y"), game.opponent(current_user).name, game.score_to_s, game.result(current_user)]
+      end
+      render json: games
+    else
+      session['games_updated_at'] = Time.now.to_i
+      @games = current_user.games.order(updated_at: :desc)
+    end
+  end
+
   # POST /games
   def create
     @game = Game.new(game_params)
